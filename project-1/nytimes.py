@@ -51,27 +51,28 @@ api = articleAPI('qbQh29tAn22AwG80h8MfRUNxucW1kcTi')
 
 def get_articles(date_year,query):
     all_articles = []
-    for i in range(0,10): #NYT limits pager to first 100 pages. But rarely will you find over 100 pages of results anyway.
+    for i in range(0,10):
         articles = api.search(q = query,
                begin_date = int(date_year + '0101'),
                end_date = int(date_year + '1231'),
                page = i)
         time.sleep(6)
-        # articles = parse_articles(articles)
-        print(articles)
-        all_articles = all_articles + articles
+        for j in range(len(articles['response']['docs'])):
+            article = articles['response']['docs'][j]['web_url']
+            print(article)
+            all_articles.append(article)
     print(all_articles)
     return all_articles
 
 
 all = []
-for i in range(1980,1981):
+for i in range(2017,2018):
     year = get_articles(str(i),'Obama')
     all = all + year
 
 
-keys = all[0].keys()
-with open('nytimes.csv', 'wb') as output_file:
-    dict_writer = csv.DictWriter(output_file, keys)
-    dict_writer.writeheader()
-    dict_writer.writerows(all)
+# keys = all[0].keys()
+# with open('nytimes.csv', 'wb') as output_file:
+#     dict_writer = csv.DictWriter(output_file, keys)
+#     dict_writer.writeheader()
+#     dict_writer.writerows(all)
