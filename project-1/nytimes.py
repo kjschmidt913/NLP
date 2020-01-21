@@ -56,6 +56,7 @@ def get_articles(date_year,query):
                begin_date = int(date_year + '0101'),
                end_date = int(date_year + '1231'),
                page = i)
+        # need to sleep so we don't get locked out of NYT
         time.sleep(6)
         for j in range(len(articles['response']['docs'])):
             article = articles['response']['docs'][j]['web_url']
@@ -66,8 +67,10 @@ def get_articles(date_year,query):
 
 
 all = []
+# TODO: change year range
+keyphrase = "US presidential elections"
 for i in range(2017,2018):
-    year = get_articles(str(i),'Obama')
+    year = get_articles(str(i), keyphrase)
     all = all + year
 
 
