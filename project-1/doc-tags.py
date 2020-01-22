@@ -12,8 +12,6 @@ nltk.pos_tag(text)
 # 2. Copy the tockenized file
 # 3. Only use the copy for everything in this file
 
-
-#find syntax for YEAR
 patterns = [
     (r'.*ing$', 'VBG'),               # gerunds
     (r'.*ed$', 'VBD'),                # simple past
@@ -22,6 +20,7 @@ patterns = [
     (r'.*\'s$', 'NN$'),               # possessive nouns
     (r'.*s$', 'NNS'),                 # plural nouns
     (r'^-?[0-9]+(.[0-9]+)?$', 'CD'),  # cardinal numbers
+    (r'^-?[0-9]+(.[0-9]+)?+([0-9]+)?+([0-9]+)?$', 'YY'),  # years
     (r'(The|the|A|a|An|an)$', 'AT'),   # articles 
     (r'.*able$', 'JJ'),                # adjectives 
     (r'.*ness$', 'NN'),                # nouns formed from adjectives
