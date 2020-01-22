@@ -3,7 +3,7 @@ nltk.download('punkt')
 from nltk import tokenize
 nltk.download('averaged_perceptron_tagger')
 
-text = tokenize.word_tokenize("Hello welcome to the world of to learn Categorizing and POS Tagging with NLTK and Python")
+text = tokenize.word_tokenize("Hello welcome to the world of to learn Categorizing and POS Tagging with NLTK and Python this should be a yeah 1992 and this a cardinal number 0.4")
 
 nltk.pos_tag(text)
 
@@ -64,5 +64,8 @@ for word, tag in tags:
         word = "<YEAR>"
     if tag == "PRP":
         word = "<PRONOUN>"
+
+
+print(tags)
 
 
