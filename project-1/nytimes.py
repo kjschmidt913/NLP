@@ -80,10 +80,14 @@ for yr in election_years:
             
         web_urls = web_urls + urls_for_year
 
+    break
+
 # print final results to file
 with open('urls_output.txt', 'w+') as out:
-    out.write(web_urls)
-   
+    for item in web_urls:
+        out.write(item + '\n')
+
+# get all raw text coropora from NYT links
 corpora = scrapeFromURL(web_urls)
 print(corpora)
 result_file = open('raw_text.txt', 'w')
