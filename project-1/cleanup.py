@@ -7,13 +7,19 @@ for line in fin:
 fin.close()
 fout.close()
 
-fin = open("out.txt", "rt")
-fout = open("out2.txt", "wt")
+import re
+original_string = open('out.txt').read()
+new_string = re.sub('[ ](?=[ ])|[^-_,A-Za-z0-9 ]+', ' @-@ ', original_string)
+open('out2.txt', 'w').write(new_string)
+
+fin = open("out2.txt", "rt")
+fout = open("out3.txt", "wt")
 
 for line in fin:
-    fout.write(line.replace('. ', '</s>. <s>'))
+    fout.write(line.replace('. ', '</s> <s>'))
 
 fin.close()
 fout.close()
+
 
 #would be great to find a better of doing it without multiple files
