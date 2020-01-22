@@ -1,53 +1,12 @@
 from NYTimesArticleAPI import articleAPI  # need to use local, manually copied package for now
+from scrape import scrapeFromURL
 import pprint
 import json
 import time
 import csv
 
+
 api = articleAPI('qbQh29tAn22AwG80h8MfRUNxucW1kcTi')
-
-# articles = api.search(q="Obama",page=99, begin_date=20111231)
-# pp = pprint.PrettyPrinter(indent=4)
-# pp.pprint(articles['response']['docs'])
-
-
-# def parse_articles(articles):
-#     '''
-#     This function takes in a response to the NYT api and parses
-#     the articles into a list of dictionaries
-#     '''
-#     news = []
-#     print(articles)
-#     for i in articles['response']['docs']:
-#         dic = {}
-#         dic['id'] = i['_id']
-#         if i['abstract'] is not None:
-#             dic['abstract'] = i['abstract'].encode("utf8")
-#         dic['headline'] = i['headline']['main'].encode("utf8")
-#         dic['desk'] = i['news_desk']
-#         dic['date'] = i['pub_date'][0:10] # cutting time of day.
-#         dic['section'] = i['section_name']
-#         if i['snippet'] is not None:
-#             dic['snippet'] = i['snippet'].encode("utf8")
-#         dic['source'] = i['source']
-#         dic['type'] = i['type_of_material']
-#         dic['url'] = i['web_url']
-#         dic['word_count'] = i['word_count']
-#         # locations
-#         locations = []
-#         for x in range(0,len(i['keywords'])):
-#             if 'glocations' in i['keywords'][x]['name']:
-#                 locations.append(i['keywords'][x]['value'])
-#         dic['locations'] = locations
-#         # subject
-#         subjects = []
-#         for x in range(0,len(i['keywords'])):
-#             if 'subject' in i['keywords'][x]['name']:
-#                 subjects.append(i['keywords'][x]['value'])
-#         dic['subjects'] = subjects
-#         news.append(dic)
-#     print(news)
-#     return(news)
 
 def get_articles(date_year, query, election_yr=2016, next_election_yr=2020):
     """
@@ -94,8 +53,7 @@ def get_articles(date_year, query, election_yr=2016, next_election_yr=2020):
     return all_articles
 
 
-all_articles = []
-
+web_urls = []
 # NOTE: doesn't like ES OR or AND, due to bug in library handling of url request format
 keyphrase = "election~"
 # start in 1968 cuz we don't get data with our 'fq' params before then
@@ -111,24 +69,25 @@ for yr in election_years:
         search_yr = yr + i
         if search_yr < 1851:  # NYT data doesn't go before 1851
             continue
-        articles_for_year = get_articles(str(search_yr), keyphrase, election_yr=yr, next_election_yr=next_yr)
+        urls_for_year = get_articles(str(search_yr), keyphrase, election_yr=yr, next_election_yr=next_yr)
 
         # print intermediate results to console
-        if len(articles_for_year) == 0:
+        if len(urls_for_year) == 0:
             print("No articles for year {}".format(search_yr))
         else:
             print("Articles for year {}:".format(search_yr))
-            print(articles_for_year)
+            print(urls_for_year)
             
-        all_articles = all_articles + articles_for_year
+        web_urls = web_urls + urls_for_year
 
 # print final results to file
-with open('output.txt', 'w+') as out:
-    out.write(all_articles)
+with open('urls_output.txt', 'w+') as out:
+    out.write(web_urls)
+   
+corpora = scrapeFromURL(web_urls)
+print(corpora)
+result_file = open('raw_text.txt', 'w')
 
+for item in corpora:
+    result_file.writelines(item)
 
-# keys = all[0].keys()
-# with open('nytimes.csv', 'wb') as output_file:
-#     dict_writer = csv.DictWriter(output_file, keys)
-#     dict_writer.writeheader()
-#     dict_writer.writerows(all)

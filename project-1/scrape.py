@@ -1,18 +1,19 @@
 from bs4 import BeautifulSoup
 import requests
 
-url = "https://www.nytimes.com/2017/04/16/us/politics/north-korea-missile-crisis-slow-motion.html"
+def scrapeFromURL(web_urls):
+    corpora = []
+    for i in web_urls:
+        r = requests.get(i)
+        soup = BeautifulSoup(r.content,"html.parser")
+        title = soup.find('title')
+        title.get_text()
+        paragraphs = soup.find_all('p')
 
-r = requests.get(url)
-soup = BeautifulSoup( r.content ,"html.parser")
-title = soup.find('title')
-title.get_text()
-paragraphs = soup.find_all('p')
+        ad0 = "Advertisement"
+        ad1 = "Supported by"
 
-#print(paragraphs)
-
-ad0 = "Advertisement"
-ad1 = "Supported by"
-for element in paragraphs:
-    if element.text != ad0 and element.text != ad1:
-        print(element.text)
+        for element in paragraphs:
+            if element.text != ad0 and element.text != ad1:
+                corpora.append(element.text)
+    return corpora
