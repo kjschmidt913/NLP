@@ -1,10 +1,13 @@
 import nltk
-import re
-import pprint
-from nltk import word_tokenize
+nltk.download('punkt')
+from nltk import tokenize
 
-# open the text file
-document = open("raw_text.txt", "r")
+text = tokenize.word_tokenize("Hello welcome to the world of to learn Categorizing and POS Tagging with NLTK and Python")
+
+nltk.pos_tag(text)
+
+# # open the text file
+# document = open("raw_text.txt", "r")
 
 
 #find syntax for YEAR
@@ -39,6 +42,15 @@ patterns = [
     # WARNING : Put the default value in the end
     (r'.*', 'NN')                      # nouns (default)
     ]
+
+
+# method to tag the doc
+regexp_tagger = nltk.RegexpTagger(patterns)
+
+# tag our document
+tags = regexp_tagger.tag(text)
+
+print(tags)
 
 
 # if word.tagmethod.tag == 'NN' word = "<noun>"
