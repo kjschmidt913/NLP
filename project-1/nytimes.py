@@ -67,6 +67,7 @@ for yr in election_years:
     # 0-4 for each year between election years
     for i in range(0, 4):
         search_yr = yr + i
+        print(search_yr)
         if search_yr < 1851:  # NYT data doesn't go before 1851
             continue
         urls_for_year = get_articles(str(search_yr), keyphrase, election_yr=yr, next_election_yr=next_yr)
@@ -79,8 +80,6 @@ for yr in election_years:
             print(urls_for_year)
             
         web_urls = web_urls + urls_for_year
-
-    break
 
 # print final results to file
 with open('urls_output.txt', 'w+') as out:
