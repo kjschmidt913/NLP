@@ -26,10 +26,10 @@ def get_articles(date_year, query, election_yr=2016, next_election_yr=2020):
         # returns 10 results per page
         articles = api.search(
             q = query,
-            fq = {'body': ["US", "presidential", "election"],
-                  'subject': ['Presidential Election of {}'.format(election_yr),
-                              'Presidential Election of {}'.format(next_election_yr),
-                              'Presidents and Presidency (US)']},
+            # fq = {'news_desk':['Politics']
+            #       },
+            # facet_fields ='news_desk',
+            # facet= 'true',
             begin_date = int(date_year + '0101'),
             end_date = int(date_year + '1231'),
             page = i
@@ -55,7 +55,7 @@ def get_articles(date_year, query, election_yr=2016, next_election_yr=2020):
 
 web_urls = []
 # NOTE: doesn't like ES OR or AND, due to bug in library handling of url request format
-keyphrase = "election~"
+keyphrase = "US+Russia+Politics"
 # start in 1968 cuz we don't get data with our 'fq' params before then
 election_years = range(1968, 2016, 4) # step every 4 years
 
