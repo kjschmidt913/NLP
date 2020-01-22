@@ -9,7 +9,7 @@ fout.close()
 
 import re
 original_string = open('out.txt').read()
-new_string = re.sub('[ ](?=[ ])|[^-_,A-Za-z0-9 .]+', '@-@', original_string)
+new_string = re.sub('[ ](?=[ ])|[^,A-Za-z0-9 .?!;:]+', '@-@', original_string)
 open('out2.txt', 'w').write(new_string)
 
 fin = open("out2.txt", "rt")
