@@ -20,7 +20,7 @@ patterns = [
     (r'.*\'s$', 'NN$'),               # possessive nouns
     (r'.*s$', 'NNS'),                 # plural nouns
     (r'^-?[0-9]+(.[0-9]+)?$', 'CD'),  # cardinal numbers
-    (r'^-?[0-9]+(.[0-9]+)?+([0-9]+)?+([0-9]+)?$', 'YY'),  # years
+    (r'^-?[0-9]+([0-9]+)?+([0-9]+)?+([0-9]+)?$', 'YY'),  # years
     (r'(The|the|A|a|An|an)$', 'AT'),   # articles 
     (r'.*able$', 'JJ'),                # adjectives 
     (r'.*ness$', 'NN'),                # nouns formed from adjectives
