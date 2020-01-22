@@ -1,4 +1,4 @@
-from nytimesarticle import articleAPI
+from NYTimesArticleAPI import articleAPI
 import pprint
 import json
 import time
@@ -51,27 +51,39 @@ api = articleAPI('qbQh29tAn22AwG80h8MfRUNxucW1kcTi')
 
 def get_articles(date_year,query):
     all_articles = []
+    # max 100 pages returned
     for i in range(0,10):
-        articles = api.search(q = query,
-               begin_date = int(date_year + '0101'),
-               end_date = int(date_year + '1231'),
-               page = i)
+        # returns 10 results per page
+        articles = api.search(
+            q = query,
+            fq = {'source': 'New York Times'},
+            begin_date = int(date_year + '0101'),
+            end_date = int(date_year + '1231'),
+            page = i
+            )
         # need to sleep so we don't get locked out of NYT
         time.sleep(6)
-        for j in range(len(articles['response']['docs'])):
-            article = articles['response']['docs'][j]['web_url']
-            print(article)
-            all_articles.append(article)
+        # TODO: remove, just for testing
+        all_articles.append(articles['response']['docs'])
+
+        # for j in range(len(articles['response']['docs'])):
+        #     article = articles['response']['docs'][j]['web_url']
+        #     print(article)
+        #     all_articles.append(article)
     print(all_articles)
     return all_articles
 
 
 all = []
 # TODO: change year range
-keyphrase = "US presidential elections"
-for i in range(2017,2018):
+# NOTE: doesn't like ES OR or AND, for some reason
+keyphrase = "(president) OR (election)"
+for i in range(2015, 2017):
     year = get_articles(str(i), keyphrase)
     all = all + year
+
+with open('output.json', 'w+') as out:
+    out.write(all)
 
 
 # keys = all[0].keys()
