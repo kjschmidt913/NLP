@@ -36,7 +36,13 @@ print(web_urls)
 corpora = scrapeFromURL(web_urls)
 print(corpora)
 
-with open('raw_text.csv', 'w') as result_file:
-    wr = csv.writer(result_file)
-    for item in corpora:
-        wr.writerow([item, ])
+# with open('raw_text.csv', 'w') as result_file:
+#     wr = csv.writer(result_file)
+#     for item in corpora:
+#         wr.writerow([item, ])
+
+
+result_file = open('raw_text.txt', 'w')
+
+for item in corpora:
+    result_file.writelines(item)
