@@ -7,8 +7,10 @@ text = tokenize.word_tokenize("Hello welcome to the world of to learn Categorizi
 
 nltk.pos_tag(text)
 
-# # open the text file
-# document = open("raw_text.txt", "r")
+# TODO:
+# 1. Open the tokenized file
+# 2. Copy the tockenized file
+# 3. Only use the copy for everything in this file
 
 
 #find syntax for YEAR
@@ -53,6 +55,15 @@ tags = regexp_tagger.tag(text)
 
 print(tags)
 
-
 # if word.tagmethod.tag == 'NN' word = "<noun>"
+for word, tag in tags:
+    if tag == "JJ":
+        word = "<ADJECTIVE>"
+    if tag == "CD":
+        word = "<NUMBER>"
+    if tag == "YY":
+        word = "<YEAR>"
+    if tag == "PRP":
+        word = "<PRONOUN>"
+
 
