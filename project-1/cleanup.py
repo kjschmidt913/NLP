@@ -4,7 +4,7 @@ import re
 nltk.download('punkt')
 
 #remove quotes resulting from <p> elements of text scraping
-fin = open("raw_text.txt", "rt")
+fin = open("elections_raw_text.txt", "rt")
 fout = open("out.txt", "wt")
 
 for line in fin:
@@ -48,4 +48,40 @@ for line in fin:
 fin.close()
 fout.close()
 
-#final output file to consider is out_final.txt
+num_words = 0
+num_lines = 0
+
+with open("out_final.txt", 'r') as f:
+    for line in f:
+        words = line.split()
+        num_words += len(words)
+
+print("Number of total tokens",num_words)
+
+#dividing the corpus in three file
+ftr = open("group3_train.txt", "wt")
+fts = open("group3_test.txt", "wt")
+fv = open("group3_valid.txt", "wt")
+
+tr = round(0.7*num_words)
+ts = round(0.85*num_words)
+
+with open("out_final.txt", "rt") as f:
+    data = f.read().split()
+
+train_data = data[:tr]
+test_data = data[tr+1:ts]
+valid_data = data[ts+1:]
+
+for line in train_data:
+    ftr.write(line + ' ')
+
+for line in test_data:
+    fts.write(line + ' ')
+
+for line in valid_data:
+    fv.write(line + ' ')
+
+ftr.close()
+fts.close()
+fv.close()
