@@ -17,7 +17,7 @@ def get_articles(date_year, query):
                               end_date=int(date_year + '1231'),
                               page=i)
         time.sleep(6)
-        if (articles['response']):
+        if 'response' in articles:
             for j in range(len(articles['response']['docs'])):
                 article = articles['response']['docs'][j]['web_url']
                 print(article)
@@ -35,12 +35,6 @@ print(web_urls)
 
 corpora = scrapeFromURL(web_urls)
 print(corpora)
-
-# with open('raw_text.csv', 'w') as result_file:
-#     wr = csv.writer(result_file)
-#     for item in corpora:
-#         wr.writerow([item, ])
-
 
 result_file = open('raw_text.txt', 'w')
 
