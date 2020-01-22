@@ -1,6 +1,7 @@
 import nltk
 nltk.download('punkt')
 from nltk import tokenize
+nltk.download('averaged_perceptron_tagger')
 
 text = tokenize.word_tokenize("Hello welcome to the world of to learn Categorizing and POS Tagging with NLTK and Python")
 
