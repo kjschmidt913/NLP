@@ -2,12 +2,11 @@ import nltk
 from construct_vocab import Vocabulary
 
 
-
 # TODO:
 # 1. uncomment the actual corpus and remove dummy corpus
 # 2. Do stats for patterns - import Vocabulary class once Nayan merges her branch
 
-def doc_tagging (textfile, type):
+def doc_tagging (textfile, train_test_valid):
 
     # This is solely for testing. Remove once using real corpus
     stringthing = "Hello welcome to the world of to learn Categorizing and POS Tagging with NLTK and Python this should be a yeah 1992 and this a cardinal number 0.4"
@@ -50,9 +49,9 @@ def doc_tagging (textfile, type):
         else:
             new_tokens.append(word)
 
-    print(new_tokens)
+    print(new_tokens) 
 
-    voc = Vocabulary(type)
+    voc = Vocabulary(train_test_valid)
 
     for sent in new_tokens:
         voc.add_sentence(sent)
