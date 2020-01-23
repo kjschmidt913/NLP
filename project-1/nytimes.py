@@ -89,7 +89,7 @@ with open('urls_output.txt', 'w+') as out:
 # get all raw text coropora from NYT links
 corpora = scrapeFromURL(web_urls)
 print(corpora)
-result_file = open('raw_text.txt', 'w')
+result_file = open('elections_raw_text.txt', 'w')
 
 for item in corpora:
     result_file.writelines(item)
