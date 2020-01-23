@@ -26,10 +26,8 @@ def get_articles(date_year, query, election_yr=2016, next_election_yr=2020):
         # returns 10 results per page
         articles = api.search(
             q = query,
-            # fq = {'news_desk':['Politics']
-            #       },
-            # facet_fields ='news_desk',
-            # facet= 'true',
+            fq = {'body':['United States','Russia','Relation']
+                  },
             begin_date = int(date_year + '0101'),
             end_date = int(date_year + '1231'),
             page = i
@@ -55,9 +53,9 @@ def get_articles(date_year, query, election_yr=2016, next_election_yr=2020):
 
 web_urls = []
 # NOTE: doesn't like ES OR or AND, due to bug in library handling of url request format
-keyphrase = "US+Russia+Politics"
-# start in 1968 cuz we don't get data with our 'fq' params before then
-election_years = range(1968, 2016, 4) # step every 4 years
+keyphrase = "U.S.+Russia+Politics"
+# Entries detected 1970 onwards
+election_years = range(1970, 2016, 4) # step every 4 years
 
 for yr in election_years:
     # the following election year
@@ -78,18 +76,24 @@ for yr in election_years:
         else:
             print("Articles for year {}:".format(search_yr))
             print(urls_for_year)
-            
+
         web_urls = web_urls + urls_for_year
 
+
 # print final results to file
-with open('urls_output.txt', 'w+') as out:
+with open('urls_output_foreign_relations.txt', 'w+') as out:
     for item in web_urls:
         out.write(item + '\n')
 
-# get all raw text coropora from NYT links
+
+# Read Web Urls from file if the API Key has reached it's max limit
+# web_urls =[]
+# with open('urls_output_foreign_relations.txt') as f:
+#     web_urls = f.read().splitlines()
+
 corpora = scrapeFromURL(web_urls)
 print(corpora)
-result_file = open('raw_text.txt', 'w')
+result_file = open('raw_text_foreign_relations.txt', 'w')
 
 for item in corpora:
     result_file.writelines(item)
