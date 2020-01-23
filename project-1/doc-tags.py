@@ -64,7 +64,7 @@ def doc_tagging (textfile, train_test_valid):
     # print("Vocab Count for ", train_test_valid,": ", vocab_count)
     # print("Token Count ", train_test_valid, ": ", len(new_tokens))
 
-    f = open("pickle-file.pkl", "a+")
+    f = open("pickle-file.pkl", "ab")
     pickle_file_name = "vocab-tagged-" + train_test_valid
     pickle.dump(pickle_file_name, f)
     f.close()
