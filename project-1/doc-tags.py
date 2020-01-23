@@ -59,8 +59,8 @@ def doc_tagging (textfile, train_test_valid):
         vocab_count += 1
         print(word," ",voc.to_word(word))
 
-    print("Vocab Count for ", train_test_valid,": ", vocab_count)
-    print("Token Count ", train_test_valid, ": ", len(new_tokens))
+    # print("Vocab Count for ", train_test_valid,": ", vocab_count)
+    # print("Token Count ", train_test_valid, ": ", len(new_tokens))
 
 
 
