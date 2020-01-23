@@ -53,14 +53,20 @@ def doc_tagging (textfile, train_test_valid):
         else:
             new_tokens.append(word)
 
-    # print(new_tokens)
+        if (word != '<' and word != '/s' and word != 's' and word != '@' and word != '-'):
+            new_tokens.append(" ")
+
+    #writing the tagged content to a text file
+    filename = "tagged-group3-"+train_test_valid+".txt"
+    fff = open(filename, "wt")
+    for xf in new_tokens:
+        fff.write(xf)
+    fff.close()
 
     voc = Vocabulary(train_test_valid)
 
     for sent in new_tokens:
         voc.add_sentence(sent)
-
-    # print(voc.index2word
 
     tagged_vocab = []
 
@@ -77,9 +83,6 @@ def doc_tagging (textfile, train_test_valid):
 
     print(ctr1,ctr2,ctr3,ctr4,"number of tokens respectively for adj, number, year, pronoun for ", train_test_valid, " set." )
 
-# UNCOMMENT TO USE ACTUAL CORPUS
 doc_tagging("group3_test.txt", "Test")
 doc_tagging("group3_train.txt", "Train")
 doc_tagging("group3_valid.txt", "Validation")
-
-# doc_tagging("hi", "Train")
