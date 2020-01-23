@@ -30,17 +30,25 @@ def doc_tagging (textfile, train_test_valid):
 
     # tag our document
     tags = regexp_tagger.tag(text)
-
+    ctr1 = 0
+    ctr2 = 0
+    ctr3 = 0
+    ctr4 = 0
+    
     # replace the words with their tags
     new_tokens = []
     for word, tag in tags:
         if tag == "JJ":
+            ctr1++
             new_tokens.append("<ADJECTIVE>")
         elif tag == "CD":
+            ctr2++
             new_tokens.append("<NUMBER>")
         elif tag == "YY":
+            ctr3++
             new_tokens.append("<YEAR>")
         elif tag == "PRP":
+            ctr4++
             new_tokens.append("<PRONOUN>")
         else:
             new_tokens.append(word)
@@ -70,7 +78,7 @@ def doc_tagging (textfile, train_test_valid):
     f.close()
 
 
-
+print(ctr1,ctr2,ctr3,ctr4,"number of tokens for adj, number, year, pronoun")
 
 # UNCOMMENT TO USE ACTUAL CORPUS
 doc_tagging("group3_test.txt", "Test")
