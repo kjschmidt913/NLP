@@ -1,6 +1,9 @@
 import nltk
 from construct_vocab import Vocabulary
+import pickle
 
+f = open("pickle-file.pkl", "wb")
+f.close()
 
 def doc_tagging (textfile, train_test_valid):
 
@@ -14,8 +17,8 @@ def doc_tagging (textfile, train_test_valid):
     patterns = [
         (r'^(19|20)\d\d$', 'YY'),  # years
         (r'^-?[0-9]+(.[0-9]+)?$', 'CD'),  # cardinal numbers
-        (r'(The|the|A|a|An|an)$', 'AT'),   # articles 
-        (r'.*able$', 'JJ'),                # adjectives 
+        (r'(The|the|A|a|An|an)$', 'AT'),   # articles
+        (r'.*able$', 'JJ'),                # adjectives
         (r'.*ly$', 'RB'),                  # adverbs
         (r'(He|he|She|she|It|it|I|me|Me|You|you)$', 'PRP'), # pronouns
         (r'(His|his|Her|her|Its|its)$', 'PRP$'),    # possesive
@@ -34,51 +37,48 @@ def doc_tagging (textfile, train_test_valid):
     ctr2 = 0
     ctr3 = 0
     ctr4 = 0
-    
+
     # replace the words with their tags
     new_tokens = []
     for word, tag in tags:
         if tag == "JJ":
-            ctr1++
+            ctr1+=1
             new_tokens.append("<ADJECTIVE>")
         elif tag == "CD":
-            ctr2++
+            ctr2+=1
             new_tokens.append("<NUMBER>")
         elif tag == "YY":
-            ctr3++
+            ctr3+=1
             new_tokens.append("<YEAR>")
         elif tag == "PRP":
-            ctr4++
+            ctr4+=1
             new_tokens.append("<PRONOUN>")
         else:
             new_tokens.append(word)
 
-    # print(new_tokens) 
+    # print(new_tokens)
 
     voc = Vocabulary(train_test_valid)
 
     for sent in new_tokens:
         voc.add_sentence(sent)
 
-    # print(voc.index2word)
+    # print(voc.index2word
 
     tagged_vocab = []
 
-    vocab_count = 0
     for word in range(voc.num_words):
-        vocab_count += 1
-        tagged_vocab.append(word," ",voc.to_word(word))
+        tagged_vocab.append(voc.to_word(word))
 
-    # print("Vocab Count for ", train_test_valid,": ", vocab_count)
-    # print("Token Count ", train_test_valid, ": ", len(new_tokens))
+
+    print("Vocab Count for ", train_test_valid,": ", len(tagged_vocab))
 
     f = open("pickle-file.pkl", "ab")
-    pickle_file_name = "vocab-tagged-" + train_test_valid
-    pickle.dump(pickle_file_name, f)
+    pickle.dump(tagged_vocab, f)
     f.close()
 
 
-    print(ctr1,ctr2,ctr3,ctr4,"number of tokens for adj, number, year, pronoun","\n", train_test_valid )
+    print(ctr1,ctr2,ctr3,ctr4,"number of tokens respectively for adj, number, year, pronoun for ", train_test_valid, " set." )
 
 # UNCOMMENT TO USE ACTUAL CORPUS
 doc_tagging("group3_test.txt", "Test")
@@ -86,5 +86,3 @@ doc_tagging("group3_train.txt", "Train")
 doc_tagging("group3_valid.txt", "Validation")
 
 # doc_tagging("hi", "Train")
-
-
