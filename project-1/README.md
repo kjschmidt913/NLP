@@ -10,3 +10,6 @@ Install NLTK package using pip or conda
 pip install nltk
 conda install nltk
 ```
+##Steps to run
+1. nytimes.py
+2. cleanup.py
