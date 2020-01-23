@@ -17,4 +17,7 @@ pip install requests
 ```
 ## Steps to run
 1. nytimes.py
-2. cleanup.py
+2. nytimes_foreign_relations.py
+3. cleanup.py
+4. construct_vocab.py
+5. doc-tags.py
