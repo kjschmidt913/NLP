@@ -1,0 +1,8 @@
+
+.DS_Store
+
+.idea/
+
+project-1/__pycache__/
+
+project-1/NYTimesArticleAPI/__pycache__/
