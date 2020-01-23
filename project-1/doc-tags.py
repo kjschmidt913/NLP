@@ -34,20 +34,33 @@ regexp_tagger = nltk.RegexpTagger(patterns)
 # tag our document
 tags = regexp_tagger.tag(text)
 
-print(tags)
+# print(tags)
+
+list_of_pairs = []
+
+for word, tag in tags:
+    list_of_pairs.append([word, tag])
+
+# print(list_of_pairs)
+
+new_tokens = []
 
 # replace the words with their tags
-for word, tag in tags:
+for word, tag in list_of_pairs:
     if tag == "JJ":
-        word = "<ADJECTIVE>"
-    if tag == "CD":
-        word = "<NUMBER>"
-    if tag == "YY":
-        word = "<YEAR>"
-    if tag == "PRP":
-        word = "<PRONOUN>"
+        new_tokens.append("<ADJECTIVE>")
+    elif tag == "CD":
+        new_tokens.append("<NUMBER>")
+    elif tag == "YY":
+        new_tokens.append("<YEAR>")
+    elif tag == "PRP":
+        new_tokens.append("<PRONOUN>")
+    else:
+        new_tokens.append(word)
+
+print(new_tokens)
 
 
-print(tags)
+
 
 
