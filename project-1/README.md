@@ -10,6 +10,11 @@ Install NLTK package using pip or conda
 pip install nltk
 conda install nltk
 ```
+Install BeautifulSoup4 and other libraries to be able to scrape and clean the data
+```
+pip install beautifulsoup4
+pip install requests
+```
 ## Steps to run
 1. nytimes.py
 2. cleanup.py
