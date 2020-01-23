@@ -21,3 +21,7 @@ pip install requests
 3. cleanup.py
 4. construct_vocab.py
 5. doc-tags.py
+
+raw_text.txt is the main corpus without tags.
+group3_train.txt, group3_test.txt, group3_valid.txt are splitted corpora files.
+Final.pickle file has Vocab list, Vocab Dict, untagged_train_vocab_list, untagged_test_vocab_list, untagged_valid_vocab_list, tagged_train_vocab_list, tagged_test_vocab_list and tagged_valid_vocab_list in order.
