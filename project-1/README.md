@@ -5,3 +5,8 @@ Install the [python wrapper](https://pypi.org/project/NYTimesArticleAPInew/) for
 ```
 pip install nytimesarticle
 ```
+Install NLTK package using pip or conda
+```
+pip install nltk
+conda install nltk
+```
