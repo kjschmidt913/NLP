@@ -2,9 +2,6 @@ import nltk
 from construct_vocab import Vocabulary
 import pickle
 
-f = open("pickle-file.pkl", "wb")
-f.close()
-
 def doc_tagging (textfile, train_test_valid):
 
     # This is solely for testing. Remove once using real corpus
@@ -73,7 +70,7 @@ def doc_tagging (textfile, train_test_valid):
 
     print("Vocab Count for ", train_test_valid,": ", len(tagged_vocab))
 
-    f = open("pickle-file.pkl", "ab")
+    f = open("Final.pickle", "ab")
     pickle.dump(tagged_vocab, f)
     f.close()
 
