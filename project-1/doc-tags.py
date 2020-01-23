@@ -2,10 +2,6 @@ import nltk
 from construct_vocab import Vocabulary
 
 
-# TODO:
-# 1. uncomment the actual corpus and remove dummy corpus
-# 2. Do stats for patterns - import Vocabulary class once Nayan merges her branch
-
 def doc_tagging (textfile, train_test_valid):
 
     # This is solely for testing. Remove once using real corpus
@@ -49,7 +45,7 @@ def doc_tagging (textfile, train_test_valid):
         else:
             new_tokens.append(word)
 
-    print(new_tokens) 
+    # print(new_tokens) 
 
     voc = Vocabulary(train_test_valid)
 
@@ -63,16 +59,16 @@ def doc_tagging (textfile, train_test_valid):
         vocab_count += 1
         print(word," ",voc.to_word(word))
 
-    print("Vocab Count: ", vocab_count)
-    print("Token Count: ", len(new_tokens))
+    print("Vocab Count for ", train_test_valid,": ", vocab_count)
+    print("Token Count ", train_test_valid, ": ", len(new_tokens))
 
 
 
 
 # UNCOMMENT TO USE ACTUAL CORPUS
-doc_tagging("group3_test.txt")
-doc_tagging("group3_train.txt")
-doc_tagging("group3_valid.txt")
+doc_tagging("group3_test.txt", "Test")
+doc_tagging("group3_train.txt", "Train")
+doc_tagging("group3_valid.txt", "Validation")
 
 # doc_tagging("hi", "Train")
 
