@@ -35,14 +35,9 @@ def doc_tagging (textfile):
     # tag our document
     tags = regexp_tagger.tag(text)
 
-    # tags is a list of tuples, we need lists
-    list_of_pairs = []
-    for word, tag in tags:
-        list_of_pairs.append([word, tag])
-
     # replace the words with their tags
     new_tokens = []
-    for word, tag in list_of_pairs:
+    for word, tag in tags:
         if tag == "JJ":
             new_tokens.append("<ADJECTIVE>")
         elif tag == "CD":
