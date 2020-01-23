@@ -15,7 +15,7 @@ fout.close()
 
 #replace all the punctuations except .?!,:; with @-@
 original_string = open('out.txt').read()
-new_string = re.sub('[ ](?=[ ])|[^-_,A-Za-z0-9 .?!,:;]+', '@-@', original_string)
+new_string = re.sub('[ ](?=[ ])|[^-_,A-Za-z0-9 .?!,:;]+', ' @-@ ', original_string)
 open('out2.txt', 'w').write(new_string)
 
 #add spaces between sentences which don't have a space between period and capital word due to the fetching pattern
@@ -72,7 +72,7 @@ fout.close()
 
 #replace all the punctuations except .?!,:; with @-@
 original_string = open('out.txt').read()
-new_string = re.sub('[ ](?=[ ])|[^-_,A-Za-z0-9 .?!,:;]+', '@-@', original_string)
+new_string = re.sub('[ ](?=[ ])|[^-_,A-Za-z0-9 .?!,:;]+', ' @-@ ', original_string)
 open('out2.txt', 'w').write(new_string)
 
 #add spaces between sentences which don't have a space between period and capital word due to the fetching pattern
