@@ -37,7 +37,6 @@ class Vocabulary:
         return self.word2index[word]
 
 
-corpus = ['Mary had a little lamb', 'Jack went up the hill', 'Jill followed soon after']
 
 # tokenized_sents = [nltk.word_tokenize(i) for i in example]
 # for i in tokenized_sents:
@@ -45,9 +44,13 @@ corpus = ['Mary had a little lamb', 'Jack went up the hill', 'Jill followed soon
 
 voc = Vocabulary('Train')
 
-for sent in corpus:
-    voc.add_sentence(sent)
+with open('group3_train.txt') as f:
+    corpora = [word for line in f for word in line.split()]
+
+for words in corpora:
+    voc.add_word(words)
 
 print(voc.index2word)
 for word in range(voc.num_words):
     print(word," ",voc.to_word(word))
+
