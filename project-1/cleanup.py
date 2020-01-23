@@ -15,7 +15,7 @@ fout.close()
 
 #replace all the punctuations except .?!,:; with @-@
 original_string = open('out.txt').read()
-new_string = re.sub('[ ](?=[ ])|[^-_,A-Za-z0-9 .?!,:;]+', ' @-@ ', original_string)
+new_string = re.sub('[ ](?=[ ])|[^-_,A-Za-z0-9 .?!,:;]+', '@-@', original_string)
 open('out2.txt', 'w').write(new_string)
 
 #add spaces between sentences which don't have a space between period and capital word due to the fetching pattern
@@ -58,37 +58,6 @@ with open("out_final.txt", 'r') as f:
 
 print("Number of total tokens",num_words)
 
-#dividing the corpus in three file
-ftr = open("group3_train.txt", "wt")
-fts = open("group3_test.txt", "wt")
-fv = open("group3_valid.txt", "wt")
-
-tr = round(0.7*num_words)
-ts = round(0.85*num_words)
-
-with open("out_final.txt", "rt") as f:
-    data = f.read().split()
-
-train_data = data[:tr]
-test_data = data[tr+1:ts]
-valid_data = data[ts+1:]
-
-for line in train_data:
-    ftr.write(line + ' ')
-
-for line in test_data:
-    fts.write(line + ' ')
-
-for line in valid_data:
-    fv.write(line + ' ')
-
-ftr.close()
-fts.close()
-fv.close()
-
-
-
-
 #######################################################
 #append the second topic's raw text
 
@@ -103,7 +72,7 @@ fout.close()
 
 #replace all the punctuations except .?!,:; with @-@
 original_string = open('out.txt').read()
-new_string = re.sub('[ ](?=[ ])|[^-_,A-Za-z0-9 .?!,:;]+', ' @-@ ', original_string)
+new_string = re.sub('[ ](?=[ ])|[^-_,A-Za-z0-9 .?!,:;]+', '@-@', original_string)
 open('out2.txt', 'w').write(new_string)
 
 #add spaces between sentences which don't have a space between period and capital word due to the fetching pattern
@@ -129,7 +98,7 @@ fout.close()
 
 #remove double hyphens with
 fin = open("out2.txt", "rt")
-fout = open("out_final.txt", "wt")
+fout = open("out_final.txt", "a")
 
 for line in fin:
     fout.write(line.replace('--', ''))
@@ -141,9 +110,9 @@ num_lines = 0
 
 
 #dividing the corpus in three file
-ftr = open("group3_train.txt", "a")
-fts = open("group3_test.txt", "a")
-fv = open("group3_valid.txt", "a")
+ftr = open("group3_train.txt", "wt")
+fts = open("group3_test.txt", "wt")
+fv = open("group3_valid.txt", "wt")
 
 tr = 7000000
 ts = 7700000
