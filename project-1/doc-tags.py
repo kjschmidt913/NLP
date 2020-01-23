@@ -58,6 +58,14 @@ for word, tag in list_of_pairs:
 print(new_tokens)
 
 
+tr = 7000000
+ts = 7700000
+
+train = new_tokens[:tr]
+test = new_tokens[tr+1:ts]
+validation = new_tokens[ts+1:]
+
+
 
 
 
