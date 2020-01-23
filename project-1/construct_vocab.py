@@ -63,8 +63,9 @@ for i in voc.word2count:
         out_of_vocab.append(i)
 
 for i in out_of_vocab:
-    if i in ["a", "e", "i", "o", "u"]:
-        out_of_vocab.pop(i)
+    if len(i) < 4:
+        print("OO",i)
+        out_of_vocab.remove(i)
 # Test <unk>
 with open('group3_test.txt', 'r') as file :
   filedata = file.read()
