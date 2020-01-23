@@ -52,7 +52,7 @@ def doc_tagging (textfile, train_test_valid):
     for sent in new_tokens:
         voc.add_sentence(sent)
 
-    print(voc.index2word)
+    # print(voc.index2word)
 
     tagged_vocab = []
 
