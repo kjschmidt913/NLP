@@ -78,7 +78,7 @@ def doc_tagging (textfile, train_test_valid):
     f.close()
 
 
-print(ctr1,ctr2,ctr3,ctr4,"number of tokens for adj, number, year, pronoun")
+    print(ctr1,ctr2,ctr3,ctr4,"number of tokens for adj, number, year, pronoun","\n", train_test_valid )
 
 # UNCOMMENT TO USE ACTUAL CORPUS
 doc_tagging("group3_test.txt", "Test")
