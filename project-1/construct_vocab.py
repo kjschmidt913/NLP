@@ -1,5 +1,6 @@
 import nltk
 import pickle
+import re
 
 
 class Vocabulary:
@@ -48,9 +49,9 @@ for words in corpora:
 train_vocab_list=[]
 for word in range(voc.num_words):
     train_vocab_list.append(voc.to_word(word))
-print("train voc",len(train_vocab_list))
+# print("train voc",len(train_vocab_list))
 
-print("Train freq", sum(voc.word2count.values()))
+# print("Train freq", sum(voc.word2count.values()))
 
 pickle_out = open("Final.pickle","wb")
 
@@ -61,22 +62,20 @@ out_of_vocab = []
 for i in voc.word2count:
     if voc.word2count[i] < 3:
         out_of_vocab.append(i)
+print(len(train_vocab_list))
 
-for i in out_of_vocab:
-    if len(i) < 4:
-        print("OO",i)
-        out_of_vocab.remove(i)
-# Test <unk>
+print(len(out_of_vocab))
+
+# # Test <unk>
 with open('group3_test.txt', 'r') as file :
-  filedata = file.read()
+  test_corpora = file.read()
 
-for word in out_of_vocab:
-    word.ljust(2)
-    word.rjust(2)
-    filedata = filedata.replace(word, '<unk>')
+word_replace = re.compile(r'\b%s\b' % r'\b|\b'.join(map(re.escape, out_of_vocab)))
+test_replaced = word_replace.sub("<unk>", test_corpora)
 
+print(test_replaced)
 with open('group3_test.txt', 'w') as file:
-  file.write(filedata)
+  file.write(test_replaced)
 
 voc_test = Vocabulary('Test')
 
@@ -97,16 +96,15 @@ pickle.dump(test_vocab_list, pickle_out)
 
 # Validation <unk>
 with open('group3_valid.txt', 'r') as file :
-  filedata = file.read()
+  valid_corpora = file.read()
 
-for word in out_of_vocab:
-    word.ljust(2)
-    word.rjust(2)
-    filedata = filedata.replace(word, '<unk>')
+
+word_replace_valid = re.compile(r'\b%s\b' % r'\b|\b'.join(map(re.escape, out_of_vocab)))
+valid_replace = word_replace_valid.sub("<unk>", valid_corpora)
 
 
 with open('group3_valid.txt', 'w') as file:
-  file.write(filedata)
+  file.write(valid_replace)
 
 voc_valid = Vocabulary('Validation')
 
