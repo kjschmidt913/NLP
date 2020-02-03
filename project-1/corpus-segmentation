@@ -1,0 +1,18 @@
+def segment(corpus, batch_size):
+    """
+    :param corpus: Corpus to be segmented
+    :param batch_size: Batch size of sequence
+    """
+    for i in range(0, len(corpus),batch_size):
+        yield corpus[i:i + batch_size]
+
+
+with open('group3_train.txt') as f:
+    corpora = [word for line in f for word in line.split()]
+
+segmented_corpus = list(segment(corpora, 30))
+sliding_window = 5
+
+
+
+
