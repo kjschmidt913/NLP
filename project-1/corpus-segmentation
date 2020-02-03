@@ -14,5 +14,12 @@ segmented_corpus = list(segment(corpora, 30))
 sliding_window = 5
 
 
+for segments in segmented_corpus:
+    if len(segments) == 30:
+        offset = 0
+        while offset != 26:
+            print(segments)
+            print(segments[offset:sliding_window+offset])
+            offset += 1
 
 
