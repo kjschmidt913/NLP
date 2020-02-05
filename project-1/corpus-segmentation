@@ -1,25 +1,43 @@
-def segment(corpus, batch_size):
-    """
-    :param corpus: Corpus to be segmented
-    :param batch_size: Batch size of sequence
-    """
-    for i in range(0, len(corpus),batch_size):
-        yield corpus[i:i + batch_size]
+# import math
+# def segment(corpus, batch_size):
+#     """
+#     :param corpus: Corpus to be segmented
+#     :param batch_size: Batch size of sequence
+#     """
+#     batches = math.floor(len(corpus)/30)
+#     for i in range(0, len(corpus), batches):
+#         yield corpus[i:i + batches]
+#
+#
+# with open('tagged-group3-Train.txt') as f:
+#     corpora = [word for line in f for word in line.split()]
+#
+# segmented_corpus = list(segment(corpora, 30))
+# print(len(segmented_corpus))
+#
+# sliding_window = 5
+#
+#
+# for segments in segmented_corpus:
+#     if len(segments) == math.floor(len(corpora)/30):
+#         offset = 0
+#         while offset != 3:
+#             print(segments[offset:sliding_window+offset])
+#             offset += 1
+import nltk
+from construct_vocab import Vocabulary
 
+voc = Vocabulary('Train')
 
-with open('group3_train.txt') as f:
+with open('tagged-group3-Train.txt') as f:
     corpora = [word for line in f for word in line.split()]
 
-segmented_corpus = list(segment(corpora, 30))
-sliding_window = 5
+for words in corpora:
+    tokenized_words = nltk.word_tokenize(words)
+    for i in tokenized_words:
+        voc.add_word(i)
 
-
-for segments in segmented_corpus:
-    if len(segments) == 30:
-        offset = 0
-        while offset != 26:
-            print(segments)
-            print(segments[offset:sliding_window+offset])
-            offset += 1
-
-
+train_vocab_list=[]
+for word in range(voc.num_words):
+    train_vocab_list.append(voc.to_word(word))
+print(len(train_vocab_list))
