@@ -1,1 +1,2 @@
-
+# project-2
+The second project for a quarter long NLP course. In this project, we create a Bengio-style feed forward neural network language model and train it on the corpus we created in project-1. We then identify hyper parameters for our model and experiment with architectural changes.
